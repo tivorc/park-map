@@ -37,6 +37,8 @@ jobs:
           cache: 'npm'
       - name: Install
         run: npm ci
+      - name: Build data.json file
+        run: node transform/index.js
       - name: Build
         run: npm run build -- --base=/park-map/
       - name: Setup Pages
