@@ -1,6 +1,8 @@
 import Konva from "konva";
 import elements from "./data.json";
 
+const ORIGINAL_WIDTH = 1400;
+
 async function draw() {
   Konva.hitOnDragEnabled = true;
 
@@ -33,7 +35,7 @@ async function draw() {
 
   tooltipLayer.add(tooltip);
 
-  const reduce = 1400 / width;
+  const reduce = ORIGINAL_WIDTH / width;
   for (const el of elements) {
     var group = new Konva.Group({
       x: el.x / reduce,
@@ -54,18 +56,6 @@ async function draw() {
           ? parseInt(p.strokeWidth) / reduce
           : undefined,
       });
-      path.on("click touchstart", function (e) {
-        const mousePos = stage.getPointerPosition();
-        const stagePos = stage.position();
-        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
-        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
-        tooltip.position({
-          x: newX,
-          y: newY,
-        });
-        tooltip.text(el.description);
-        tooltip.show();
-      });
 
       group.add(path);
     }
@@ -79,18 +69,6 @@ async function draw() {
         fill: p.fill,
         // stroke: 'black',
         // strokeWidth: 4,
-      });
-      oval.on("click touchstart", function (e) {
-        const mousePos = stage.getPointerPosition();
-        const stagePos = stage.position();
-        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
-        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
-        tooltip.position({
-          x: newX,
-          y: newY,
-        });
-        tooltip.text(el.description);
-        tooltip.show();
       });
 
       group.add(oval);
@@ -106,19 +84,6 @@ async function draw() {
         // strokeWidth: 4,
       });
 
-      circle.on("click touchstart", function (e) {
-        const mousePos = stage.getPointerPosition();
-        const stagePos = stage.position();
-        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
-        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
-        tooltip.position({
-          x: newX,
-          y: newY,
-        });
-        tooltip.text(el.description);
-        tooltip.show();
-      });
-
       group.add(circle);
     }
 
@@ -131,22 +96,21 @@ async function draw() {
         rotation: p.rotate,
         fill: p.fill,
       });
-      rect.on("click touchstart", function (e) {
-        const mousePos = stage.getPointerPosition();
-        const stagePos = stage.position();
-        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
-        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
-        tooltip.position({
-          x: newX,
-          y: newY,
-        });
-        tooltip.text(el.description);
-        tooltip.show();
-      });
 
       group.add(rect);
     }
-
+    group.on("click touchstart", function (e) {
+      const mousePos = stage.getPointerPosition();
+      const stagePos = stage.position();
+      const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
+      const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
+      tooltip.position({
+        x: newX,
+        y: newY,
+      });
+      tooltip.text(el.description);
+      tooltip.show();
+    });
     layer.add(group);
   }
 
