@@ -50,13 +50,18 @@ async function draw() {
         scaleX: el.width / el.width / reduce,
         scaleY: el.height / el.height / reduce,
         stroke: p.stroke || undefined,
-        strokeWidth: p.strokeWidth ? parseInt(p.strokeWidth) / reduce : undefined,
+        strokeWidth: p.strokeWidth
+          ? parseInt(p.strokeWidth) / reduce
+          : undefined,
       });
       path.on("click touchstart", function (e) {
         const mousePos = stage.getPointerPosition();
+        const stagePos = stage.position();
+        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
+        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
         tooltip.position({
-          x: mousePos.x + 5,
-          y: mousePos.y + 5,
+          x: newX,
+          y: newY,
         });
         tooltip.text(el.description);
         tooltip.show();
@@ -76,10 +81,13 @@ async function draw() {
         // strokeWidth: 4,
       });
       oval.on("click touchstart", function (e) {
-        var mousePos = stage.getPointerPosition();
+        const mousePos = stage.getPointerPosition();
+        const stagePos = stage.position();
+        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
+        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
         tooltip.position({
-          x: mousePos.x + 5,
-          y: mousePos.y + 5,
+          x: newX,
+          y: newY,
         });
         tooltip.text(el.description);
         tooltip.show();
@@ -100,9 +108,12 @@ async function draw() {
 
       circle.on("click touchstart", function (e) {
         const mousePos = stage.getPointerPosition();
+        const stagePos = stage.position();
+        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
+        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
         tooltip.position({
-          x: mousePos.x + 5,
-          y: mousePos.y + 5,
+          x: newX,
+          y: newY,
         });
         tooltip.text(el.description);
         tooltip.show();
@@ -122,9 +133,12 @@ async function draw() {
       });
       rect.on("click touchstart", function (e) {
         const mousePos = stage.getPointerPosition();
+        const stagePos = stage.position();
+        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
+        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
         tooltip.position({
-          x: mousePos.x + 5,
-          y: mousePos.y + 5,
+          x: newX,
+          y: newY,
         });
         tooltip.text(el.description);
         tooltip.show();
