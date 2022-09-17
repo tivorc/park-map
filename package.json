@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "konva": "^8.3.12",
     "vite": "^3.1.1"
   }
 }
