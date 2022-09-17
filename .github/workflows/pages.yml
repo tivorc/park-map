@@ -35,9 +35,10 @@ jobs:
         with:
           node-version: 18.0.0
           cache: 'npm'
-      - name: Install and build
-      - run: npm ci
-      - run: npm run build
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
