@@ -23,13 +23,13 @@
     "x": 329.43,
     "y": 258.81
   },
-  "pools": {
+  "05-pools": {
     "name": "Piscinas",
     "description": "Piscinas",
     "x": 1017,
     "y": 326
   },
-  "lake": {
+  "06-lake": {
     "name": "Lago",
     "description": "Lago",
     "x": 554.51,
