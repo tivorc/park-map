@@ -1,7 +1,7 @@
 {
   "00-all-area": {
-    "name": "Area total",
-    "description": "Area total",
+    "name": "",
+    "description": "",
     "x": 235,
     "y": 52
   },
@@ -51,12 +51,18 @@
     "name": "Baños piscina",
     "description": "Baños piscina",
     "x": 1099.26,
-    "y": 404.45
+    "y": 394.01
   },
   "10-pool-showers": {
     "name": "Regaderas piscina",
     "description": "Regaderas piscina",
     "x": 1088.06,
+    "y": 404.45
+  },
+  "11-pool-warehouse": {
+    "name": "Almacén piscina",
+    "description": "Almacén piscina",
+    "x": 1076.87,
     "y": 414.89
   },
   "12-primary-school": {
@@ -64,5 +70,23 @@
     "description": "Colegio primario",
     "x": 1129.99,
     "y": 346.9
+  },
+  "13-volleyball-court": {
+    "name": "Cancha de voleibol",
+    "description": "Cancha de voleibol",
+    "x": 870.75,
+    "y": 268.25
+  },
+  "14-soccer-field-01": {
+    "name": "Cancha de fútbol 01",
+    "description": "Cancha de fútbol 01",
+    "x": 742,
+    "y": 342
+  },
+  "15-soccer-field-02": {
+    "name": "Cancha de fútbol 02",
+    "description": "Cancha de fútbol 02",
+    "x": 625.42,
+    "y": 469.83
   }
 }

@@ -1,3 +1,5 @@
 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect id="10-pool-showers" x="0.0649414" y="10.8893" width="15.3059" height="23.3233" transform="rotate(-43 0.0649414 10.8893)" fill="#D9D9D9"/>
+<g id="10-pool-showers">
+<rect id="showers" x="0.0649414" y="10.8893" width="15.3059" height="23.3233" transform="rotate(-43 0.0649414 10.8893)" fill="#D9D9D9"/>
+</g>
 </svg>

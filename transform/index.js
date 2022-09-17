@@ -20,18 +20,20 @@ fs.readdir(path.join(__dirname, "../images"))
       const rects = file.match(/<rect.*?\/>/g) || [];
 
       const rectData = rects.map((rect) => {
-        const x = rect.match(/x="([\d.]+)"/)[1];
-        const y = rect.match(/y="([\d.]+)"/)[1];
+        const x = rect.match(/x="([-\d.]+)"/)[1];
+        const y = rect.match(/y="([-\d.]+)"/)[1];
         const width = rect.match(/width="([\d.]+)"/)[1];
         const height = rect.match(/height="([\d.]+)"/)[1];
         const fill = rect.match(/fill="(.*)"/)[1];
         const rotation = rect.match(/transform="rotate\(([-\d.]+)/);
+        const rx = rect.match(/rx="([\d]+)"/);
         return {
           x: Number(x),
           y: Number(y),
           width: Number(width),
           height: Number(height),
           rotate: rotation ? Number(rotation[1]) : 0,
+          rx: rx ? Number(rx[1]) : 0,
           fill,
         };
       });

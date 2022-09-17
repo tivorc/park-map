@@ -94,6 +94,7 @@ async function draw() {
         width: p.width / reduce,
         height: p.height / reduce,
         rotation: p.rotate,
+        cornerRadius: p.rx / reduce,
         fill: p.fill,
       });
 
