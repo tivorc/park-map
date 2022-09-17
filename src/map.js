@@ -3,6 +3,28 @@ import elements from "./data.json";
 
 const ORIGINAL_WIDTH = 1400;
 
+function updateTooltip(tooltip, x, y, text, scale) {
+  tooltip.getText().text(text);
+  tooltip.getText().fontSize(18 / scale);
+  tooltip.getText().padding(5 / scale);
+  tooltip.getTag().pointerWidth(10 / scale);
+  tooltip.getTag().pointerHeight(10 / scale);
+  tooltip.position({
+    x: x,
+    y: y,
+  });
+  tooltip.show();
+}
+
+function updateTooltipScale(tooltip, scale) {
+  if (tooltip.visible()) {
+    tooltip.getText().fontSize(18 / scale);
+    tooltip.getText().padding(5 / scale);
+    tooltip.getTag().pointerWidth(10 / scale);
+    tooltip.getTag().pointerHeight(10 / scale);
+  }
+}
+
 async function draw() {
   Konva.hitOnDragEnabled = true;
 
@@ -22,16 +44,37 @@ async function draw() {
   const layer = new Konva.Layer();
   const tooltipLayer = new Konva.Layer();
 
-  const tooltip = new Konva.Text({
-    text: "",
-    fontFamily: "Calibri",
-    fontSize: 12,
-    padding: 5,
-    visible: false,
-    fill: "black",
+  const tooltip = new Konva.Label({
     opacity: 0.75,
-    textFill: "white",
+    visible: false,
+    listening: false,
   });
+
+  tooltip.add(
+    new Konva.Tag({
+      fill: "black",
+      pointerDirection: "down",
+      pointerWidth: 10,
+      pointerHeight: 10,
+      lineJoin: "round",
+      shadowColor: "black",
+      shadowBlur: 10,
+      shadowOffsetX: 10,
+      shadowOffsetY: 10,
+      shadowOpacity: 0.5,
+      cornerRadius: 3,
+    })
+  );
+
+  tooltip.add(
+    new Konva.Text({
+      text: "",
+      fontFamily: "system-ui",
+      fontSize: 18,
+      padding: 5,
+      fill: "white",
+    })
+  );
 
   tooltipLayer.add(tooltip);
 
@@ -100,18 +143,15 @@ async function draw() {
 
       group.add(rect);
     }
-    group.on("click touchstart", function (e) {
-      const mousePos = stage.getPointerPosition();
-      const stagePos = stage.position();
-      const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
-      const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
-      tooltip.position({
-        x: newX,
-        y: newY,
+    if (el.description) {
+      group.on("click touchstart", function () {
+        const mousePos = stage.getPointerPosition();
+        const stagePos = stage.position();
+        const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
+        const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
+        updateTooltip(tooltip, newX, newY, el.description, stage.scaleX());
       });
-      tooltip.text(el.description);
-      tooltip.show();
-    });
+    }
     layer.add(group);
   }
 
@@ -174,17 +214,18 @@ async function draw() {
 
       stage.scaleX(scale);
       stage.scaleY(scale);
-
+      
       // calculate new position of the stage
       var dx = newCenter.x - lastCenter.x;
       var dy = newCenter.y - lastCenter.y;
-
+      
       var newPos = {
         x: newCenter.x - pointTo.x * scale + dx,
         y: newCenter.y - pointTo.y * scale + dy,
       };
-
+      
       stage.position(newPos);
+      updateTooltipScale(tooltip, scale);
 
       lastDist = dist;
       lastCenter = newCenter;
