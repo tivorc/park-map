@@ -1,92 +1,62 @@
 {
   "00-all-area": {
     "name": "",
-    "description": "",
-    "x": 235,
-    "y": 52
+    "description": ""
   },
   "01-vehicular-road": {
     "name": "Ingreso vehicular",
-    "description": "Ingreso vehicular",
-    "x": 718.02,
-    "y": 490.09
+    "description": "Ingreso vehicular"
   },
   "03-vehicle-parking": {
     "name": "Estacionamiento vehicular",
-    "description": "Estacionamiento vehicular",
-    "x": 913,
-    "y": 586
+    "description": "Estacionamiento vehicular"
   },
   "04-pedestrian-path": {
     "name": "Camino peatonal",
-    "description": "Camino peatonal",
-    "x": 329.43,
-    "y": 258.81
+    "description": "Camino peatonal"
   },
   "05-pools": {
     "name": "Piscinas",
-    "description": "Piscinas",
-    "x": 1017,
-    "y": 326
+    "description": "Piscinas"
   },
   "06-lake": {
     "name": "Lago",
-    "description": "Lago",
-    "x": 554.51,
-    "y": 691.81
+    "description": "Lago"
   },
   "07-auditorium": {
     "name": "Auditorium",
-    "description": "Auditorium",
-    "x": 906.5,
-    "y": 524.3
+    "description": "Auditorium"
   },
   "08-school": {
     "name": "Colegio",
-    "description": "Colegio",
-    "x": 782.78,
-    "y": 717.62
+    "description": "Colegio"
   },
   "09-pool-restroom": {
     "name": "Baños piscina",
-    "description": "Baños piscina",
-    "x": 1099.26,
-    "y": 394.01
+    "description": "Baños piscina"
   },
   "10-pool-showers": {
     "name": "Regaderas piscina",
-    "description": "Regaderas piscina",
-    "x": 1088.06,
-    "y": 404.45
+    "description": "Regaderas piscina"
   },
   "11-pool-warehouse": {
     "name": "Almacén piscina",
-    "description": "Almacén piscina",
-    "x": 1076.87,
-    "y": 414.89
+    "description": "Almacén piscina"
   },
   "12-primary-school": {
     "name": "Colegio primario",
-    "description": "Colegio primario",
-    "x": 1129.99,
-    "y": 346.9
+    "description": "Colegio primario"
   },
   "13-volleyball-court": {
     "name": "Cancha de voleibol",
-    "description": "Cancha de voleibol",
-    "x": 870.75,
-    "y": 268.25
+    "description": "Cancha de voleibol"
   },
   "14-soccer-field-01": {
     "name": "Cancha de fútbol 01",
-    "description": "Cancha de fútbol 01",
-    "x": 742,
-    "y": 342
+    "description": "Cancha de fútbol 01"
   },
   "15-soccer-field-02": {
     "name": "Cancha de fútbol 02",
-    "description": "Cancha de fútbol 02",
-    "x": 625.42,
-    "y": 469.83
+    "description": "Cancha de fútbol 02"
   }
 }

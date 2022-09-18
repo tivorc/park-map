@@ -1,28 +1,21 @@
 import Konva from "konva";
-import elements from "./data.json";
+import mapInfo from "./data.json";
 
 const ORIGINAL_WIDTH = 1400;
 
-function updateTooltip(tooltip, x, y, text, scale) {
+function updateTooltip(tooltip, x, y, text) {
   tooltip.getText().text(text);
-  tooltip.getText().fontSize(18 / scale);
-  tooltip.getText().padding(5 / scale);
-  tooltip.getTag().pointerWidth(10 / scale);
-  tooltip.getTag().pointerHeight(10 / scale);
-  tooltip.position({
-    x: x,
-    y: y,
-  });
+  tooltip.position({ x, y });
   tooltip.show();
 }
 
 function updateTooltipScale(tooltip, scale) {
-  if (tooltip.visible()) {
-    tooltip.getText().fontSize(18 / scale);
-    tooltip.getText().padding(5 / scale);
-    tooltip.getTag().pointerWidth(10 / scale);
-    tooltip.getTag().pointerHeight(10 / scale);
-  }
+  if (!tooltip.visible()) return;
+
+  tooltip.getText().fontSize(18 / scale);
+  tooltip.getText().padding(5 / scale);
+  tooltip.getTag().pointerWidth(10 / scale);
+  tooltip.getTag().pointerHeight(10 / scale);
 }
 
 async function draw() {
@@ -79,80 +72,59 @@ async function draw() {
   tooltipLayer.add(tooltip);
 
   const reduce = ORIGINAL_WIDTH / width;
-  for (const el of elements) {
-    var group = new Konva.Group({
-      x: el.x / reduce,
-      y: el.y / reduce,
-      // rotation: 20,
-    });
+  for (const el of mapInfo.elements) {
+    let item = null;
 
-    for (const p of el.pathData) {
-      const path = new Konva.Path({
-        // x: p.x / reduce,
-        // y: p.y / reduce,
-        data: p.d,
-        fill: p.fill,
-        scaleX: el.width / el.width / reduce,
-        scaleY: el.height / el.height / reduce,
-        stroke: p.stroke || undefined,
-        strokeWidth: p.strokeWidth
-          ? parseInt(p.strokeWidth) / reduce
-          : undefined,
+    if (el.type === "path") {
+      item = new Konva.Path({
+        data: el.data.d,
+        fill: el.data.fill,
+        scaleX: ORIGINAL_WIDTH / ORIGINAL_WIDTH / reduce,
+        scaleY: ORIGINAL_WIDTH / ORIGINAL_WIDTH / reduce,
       });
-
-      group.add(path);
     }
 
-    for (const p of el.ellipseData) {
-      const oval = new Konva.Ellipse({
-        x: p.cx / reduce,
-        y: p.cy / reduce,
-        radiusX: p.rx / reduce,
-        radiusY: p.ry / reduce,
-        fill: p.fill,
-        // stroke: 'black',
-        // strokeWidth: 4,
+    if (el.type === "ellipse") {
+      item = new Konva.Ellipse({
+        x: el.data.cx / reduce,
+        y: el.data.cy / reduce,
+        radiusX: el.data.rx / reduce,
+        radiusY: el.data.ry / reduce,
+        fill: el.data.fill,
       });
-
-      group.add(oval);
     }
 
-    for (const p of el.circleData) {
-      const circle = new Konva.Circle({
-        x: p.cx / reduce,
-        y: p.cy / reduce,
-        radius: p.r / reduce,
-        fill: p.fill,
-        // stroke: 'black',
-        // strokeWidth: 4,
+    if (el.type === "circle") {
+      item = new Konva.Circle({
+        x: el.data.cx / reduce,
+        y: el.data.cy / reduce,
+        radius: el.data.r / reduce,
+        fill: el.data.fill,
       });
-
-      group.add(circle);
     }
 
-    for (const p of el.rectData) {
-      const rect = new Konva.Rect({
-        x: p.x / reduce,
-        y: p.y / reduce,
-        width: p.width / reduce,
-        height: p.height / reduce,
-        rotation: p.rotate,
-        cornerRadius: p.rx / reduce,
-        fill: p.fill,
+    if (el.type === "rect") {
+      item = new Konva.Rect({
+        x: el.data.x / reduce,
+        y: el.data.y / reduce,
+        width: el.data.width / reduce,
+        height: el.data.height / reduce,
+        rotation: el.data.rotate,
+        cornerRadius: el.data.rx / reduce,
+        fill: el.data.fill,
       });
-
-      group.add(rect);
     }
+
     if (el.description) {
-      group.on("click touchstart", function () {
+      item.on("click touchstart", function () {
         const mousePos = stage.getPointerPosition();
         const stagePos = stage.position();
         const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX();
         const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY();
-        updateTooltip(tooltip, newX, newY, el.description, stage.scaleX());
+        updateTooltip(tooltip, newX, newY, el.description);
       });
     }
-    layer.add(group);
+    layer.add(item);
   }
 
   stage.add(layer);
@@ -214,16 +186,16 @@ async function draw() {
 
       stage.scaleX(scale);
       stage.scaleY(scale);
-      
+
       // calculate new position of the stage
       var dx = newCenter.x - lastCenter.x;
       var dy = newCenter.y - lastCenter.y;
-      
+
       var newPos = {
         x: newCenter.x - pointTo.x * scale + dx,
         y: newCenter.y - pointTo.y * scale + dy,
       };
-      
+
       stage.position(newPos);
       updateTooltipScale(tooltip, scale);
 
