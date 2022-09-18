@@ -53,6 +53,8 @@ export default function addStageListeners(stage, updateTooltipScale) {
 
       var scale = stage.scaleX() * (dist / lastDist);
 
+      if(scale < 1) 
+        scale = 1;
       stage.scaleX(scale);
       stage.scaleY(scale);
 
