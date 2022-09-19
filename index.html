@@ -10,13 +10,34 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <title>Park map</title>
+  <style>
+    .zoom {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+    }
+
+    .hand-wheel-zoom {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .hand-wheel-zoom {
+        display: block;
+      }
+
+      .hand-finger-zoom {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <div class="container">
     <div id="map"></div>
     <div class="zoom">
-      <img class="hand-weel-zoom" src="/hand-weel.svg" alt="" height="45" width="45">
+      <img class="hand-wheel-zoom" src="/hand-weel.svg" alt="" height="45" width="45">
       <img class="hand-finger-zoom" src="/hand-finger.svg" alt="" height="45" width="45">
     </div>
   </div>
