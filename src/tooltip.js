@@ -46,8 +46,6 @@ export function updateTooltip(x, y, text) {
 }
 
 export function updateTooltipScale(scale) {
-  if (!tooltip.visible()) return;
-
   tooltip.getText().fontSize(FONT_SIZE / scale);
   tooltip.getText().padding(PADDING / scale);
   tooltip.getTag().pointerWidth(POINTER_SIZE / scale);

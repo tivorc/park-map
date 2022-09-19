@@ -98,6 +98,7 @@ export default function addStageListeners(stage, updateTooltipScale) {
       y: pointerY - mousePointTo.y * newScale,
     };
     stage.position(newPos);
+    updateTooltipScale(newScale);
     stage.batchDraw();
   });
 }
