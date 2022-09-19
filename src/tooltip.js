@@ -52,8 +52,4 @@ export function updateTooltipScale(scale) {
   tooltip.getTag().pointerHeight(POINTER_SIZE / scale);
 }
 
-export function hideTooltip() {
-  tooltip.hide();
-}
-
 export default tooltipLayer;
