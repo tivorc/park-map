@@ -26,7 +26,7 @@ async function draw() {
   let translateX = 0;
   let translateY = 0;
   let reduce = 1;
-  if(width > height) {
+  if (width > height) {
     reduce = mapInfo.height / height;
     translateX = (width - mapInfo.width / reduce) / 2;
   } else {
@@ -36,8 +36,11 @@ async function draw() {
   for (const element of mapInfo.elements) {
     let item = createShape(element, mapInfo.width, reduce);
 
-    item.on("click touchstart", function () {
-      if (!element.description) return hideTooltip();
+    item.on("click touchstart", function (e) {
+      const touch1 = e.evt.touches[0];
+      const touch2 = e.evt.touches[1];
+
+      if ((touch1 && touch2) || !element.description) return hideTooltip();
       const mousePos = stage.getPointerPosition();
       const stagePos = stage.position();
       const plusX = stagePos.x < 0 ? 0 : stagePos.x * 2;
