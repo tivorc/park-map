@@ -23,7 +23,16 @@ async function draw() {
 
   const layer = new Konva.Layer();
 
-  const reduce = mapInfo.width / width;
+  let translateX = 0;
+  let translateY = 0;
+  let reduce = 1;
+  if(width > height) {
+    reduce = mapInfo.height / height;
+    translateX = (width - mapInfo.width / reduce) / 2;
+  } else {
+    reduce = mapInfo.width / width;
+    translateY = (height - mapInfo.height / reduce) / 2;
+  }
   for (const element of mapInfo.elements) {
     let item = createShape(element, mapInfo.width, reduce);
 
@@ -40,9 +49,8 @@ async function draw() {
     layer.add(item);
   }
 
-  const translateY = (height - mapInfo.height / reduce) / 2;
   const newPos = {
-    x: 0,
+    x: translateX,
     y: translateY,
   };
   stage.position(newPos);

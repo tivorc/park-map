@@ -10,6 +10,7 @@ function getCenter(p1, p2) {
 }
 let lastCenter = null;
 let lastDist = 0;
+const scaleBy = 1.01;
 
 export default function addStageListeners(stage, updateTooltipScale) {
   stage.on("touchmove", function (e) {
@@ -53,8 +54,7 @@ export default function addStageListeners(stage, updateTooltipScale) {
 
       var scale = stage.scaleX() * (dist / lastDist);
 
-      if(scale < 1) 
-        scale = 1;
+      if (scale < 1) scale = 1;
       stage.scaleX(scale);
       stage.scaleY(scale);
 
@@ -69,6 +69,7 @@ export default function addStageListeners(stage, updateTooltipScale) {
 
       stage.position(newPos);
       updateTooltipScale(scale);
+      stage.batchDraw();
 
       lastDist = dist;
       lastCenter = newCenter;
@@ -78,5 +79,25 @@ export default function addStageListeners(stage, updateTooltipScale) {
   stage.on("touchend", function () {
     lastDist = 0;
     lastCenter = null;
+  });
+
+  stage.on("wheel", function (event) {
+    event.evt.preventDefault();
+    const oldScale = stage.scaleX();
+    const { x: pointerX, y: pointerY } = stage.getPointerPosition();
+    const mousePointTo = {
+      x: (pointerX - stage.x()) / oldScale,
+      y: (pointerY - stage.y()) / oldScale,
+    };
+    let newScale =
+      event.evt.deltaY > 0 ? oldScale * scaleBy : oldScale / scaleBy;
+    if (newScale < 1) newScale = 1;
+    stage.scale({ x: newScale, y: newScale });
+    const newPos = {
+      x: pointerX - mousePointTo.x * newScale,
+      y: pointerY - mousePointTo.y * newScale,
+    };
+    stage.position(newPos);
+    stage.batchDraw();
   });
 }
