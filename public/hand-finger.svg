@@ -1,0 +1,9 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M31.0001 71.0001C31.3334 70.1668 31.1001 67.0001 27.5001 61.0001C23.0001 53.5001 26.0001 52.5001 25.0001 48.5001C24.0001 44.5001 21.5 38.5 19.5001 37.0001C17.1677 35.2508 22.0001 27.5001 27.5001 34.5001C31.9001 40.5001 33 41.5 33 41C34.3333 36.3333 37.7 23.8001 40.5 13.0001C42.4445 5.5 52 5.99999 49.5 15C47.3967 22.5721 44.8333 33.239 44 36.3584M49 27.0001C51.6667 27.0312 55.5 29.0001 54.1558 33.7968C53.8186 35.0001 53.5 36.5001 53 39.0001M57 33.7968C60.1667 32.8646 65 34.5001 61.5 44.5001M65 40.5001C67.8333 40.5001 72.8 42.3001 70 49.5001C67.2 56.7001 67.8361 56.6139 66 61.0001C63.2679 67.5267 57.1 73.1001 57.5 77.5001" stroke="black" stroke-width="2" stroke-linecap="round"/>
+<line x1="33" y1="3.41421" x2="24.4142" y2="12" stroke="black" stroke-width="2" stroke-linecap="round"/>
+<line x1="24" y1="5" x2="24" y2="12" stroke="black" stroke-width="2" stroke-linecap="round"/>
+<line x1="24" y1="12" x2="31" y2="12" stroke="black" stroke-width="2" stroke-linecap="round"/>
+<line x1="10" y1="25.5858" x2="18.5858" y2="17" stroke="black" stroke-width="2" stroke-linecap="round"/>
+<line x1="19" y1="24" x2="19" y2="17" stroke="black" stroke-width="2" stroke-linecap="round"/>
+<line x1="19" y1="17" x2="12" y2="17" stroke="black" stroke-width="2" stroke-linecap="round"/>
+</svg>

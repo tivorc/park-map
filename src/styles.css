@@ -15,3 +15,17 @@ body {
   bottom: 8px;
   right: 8px;
 }
+
+.hand-weel-zoom {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hand-weel-zoom {
+    display: block;
+  }
+
+  .hand-finger-zoom {
+    display: none;
+  }
+}
