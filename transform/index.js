@@ -1,15 +1,15 @@
 const fs = require("fs/promises");
 const path = require("path");
-const extra = require("./svg-files-mapping.json");
 
 const methods = {
   path: getPathData,
   circle: getCircleData,
   rect: getRectData,
   ellipse: getEllipseData,
+  text: getTextData,
 };
 
-fs.readFile(path.join(__dirname, "../images", "map.svg"), "utf8").then(
+fs.readFile(path.join(__dirname, "../images", "map.svg"), "ascii").then(
   (file) => {
     const width = file.match(/width="(\d+)"/)[1];
     const height = file.match(/height="(\d+)"/)[1];
@@ -17,14 +17,15 @@ fs.readFile(path.join(__dirname, "../images", "map.svg"), "utf8").then(
 
     const result = groups.map((group) => {
       const id = group.match(/id="(\d[\w-]+)"/)[1];
+      const text = group.match(/<(text).+/g);
       const elements = group.match(/<(path|circle|rect|ellipse).+/g);
 
-      const extraData = extra[id] || {};
+      const description = text ? methods.text(text[0]) : "";
 
       const data = elements.map((element) => {
         const type = element.match(/<(\w+)/)[1];
         const data = methods[type](element);
-        return { type, data, id, ...extraData };
+        return { type, data, id, description };
       });
       return data;
     });
@@ -86,4 +87,17 @@ function getEllipseData(ellipse) {
   const fill = ellipse.match(/fill="(.*)"/)[1];
 
   return { cx, cy, rx, ry, fill };
+}
+
+function getTextData(text) {
+  const textContent = text
+    .match(/<tspan.*>(.*)<\/tspan>/)[1]
+    .replace(/&#x([0-9a-f]{2,});/gi, function (_, pair) {
+      return String.fromCharCode(parseInt(pair, 16));
+    })
+    .replace(/&#([0-9a-f]{2});/gi, function (_, pair) {
+      return String.fromCharCode(pair);
+    });
+
+  return textContent;
 }
