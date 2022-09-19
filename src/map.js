@@ -2,11 +2,7 @@ import Konva from "konva";
 import createShape from "./create-shape";
 import mapInfo from "./data.json";
 import addStageListeners from "./stage-event-listeners";
-import tooltipLayer, {
-  hideTooltip,
-  updateTooltip,
-  updateTooltipScale,
-} from "./tooltip";
+import tooltipLayer, { updateTooltip, updateTooltipScale } from "./tooltip";
 
 async function draw() {
   Konva.hitOnDragEnabled = true;
@@ -36,11 +32,22 @@ async function draw() {
   for (const element of mapInfo.elements) {
     let item = createShape(element, mapInfo.width, reduce);
 
-    item.on("click touchstart", function (e) {
-      const touch1 = e.evt.touches[0];
-      const touch2 = e.evt.touches[1];
+    layer.add(item);
+    if (!element.description) continue;
 
-      if ((touch1 && touch2) || !element.description) return hideTooltip();
+    item.on("mouseenter", function () {
+      stage.container().style.cursor = "pointer";
+    });
+    item.on("mouseleave", function () {
+      stage.container().style.cursor = "default";
+    });
+    item.on("click touchstart", function (e) {
+      if (e.type !== "click") {
+        const touch1 = e.evt.touches[0];
+        const touch2 = e.evt.touches[1];
+        if (touch1 && touch2) return;
+      }
+
       const mousePos = stage.getPointerPosition();
       const stagePos = stage.position();
       const plusX = stagePos.x < 0 ? 0 : stagePos.x * 2;
@@ -49,7 +56,6 @@ async function draw() {
       const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY() - plusY;
       updateTooltip(newX, newY, element.description);
     });
-    layer.add(item);
   }
 
   const newPos = {
