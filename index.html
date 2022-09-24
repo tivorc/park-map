@@ -11,6 +11,18 @@
   <link rel="manifest" href="/site.webmanifest">
   <title>Park map</title>
   <style>
+    body {
+      margin: 0;
+      background-color: rgb(30, 30, 65);
+    }
+
+    .container {
+      background-color: rgb(193, 193, 193);
+      margin: 0.5rem;
+      border-radius: 10px;
+      position: relative;
+    }
+
     .zoom {
       position: absolute;
       bottom: 8px;
@@ -21,9 +33,14 @@
       display: none;
     }
 
+    .hand-finger-zoom {
+      content: url(/hand-finger.svg);
+    }
+
     @media (min-width: 768px) {
       .hand-wheel-zoom {
         display: block;
+        content: url(/hand-wheel.svg);
       }
 
       .hand-finger-zoom {
@@ -37,8 +54,8 @@
   <div class="container">
     <div id="map"></div>
     <div class="zoom">
-      <img class="hand-wheel-zoom" src="/hand-weel.svg" alt="" height="45" width="45">
-      <img class="hand-finger-zoom" src="/hand-finger.svg" alt="" height="45" width="45">
+      <img class="hand-wheel-zoom" alt="" height="45" width="45">
+      <img class="hand-finger-zoom" alt="" height="45" width="45">
     </div>
   </div>
   <script type="module" src="app.js"></script>
