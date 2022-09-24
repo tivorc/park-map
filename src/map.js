@@ -51,9 +51,13 @@ async function draw() {
       const mousePos = stage.getPointerPosition();
       const stagePos = stage.position();
       const plusX = stagePos.x < 0 ? 0 : stagePos.x * 2;
-      const newX = (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX() - plusX;
+      const newX =
+        (Math.abs(stagePos.x) + mousePos.x) / stage.scaleX() -
+        plusX / stage.scaleX();
       const plusY = stagePos.y < 0 ? 0 : stagePos.y * 2;
-      const newY = (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY() - plusY;
+      const newY =
+        (Math.abs(stagePos.y) + mousePos.y) / stage.scaleY() -
+        plusY / stage.scaleY();
       updateTooltip(newX, newY, element.description);
     });
   }
